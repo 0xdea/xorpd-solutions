@@ -14,7 +14,7 @@
 ;   xor'ed with rbx which has been previously rotated 13
 ;   positions to the right as well.
 ; - Finally, the contents of rax and rcx are compared. They
-;   will equal, regardless of their initial value and of 
+;   will be equal, regardless of their initial value and of 
 ;   the value of the mask contained in rbx, because of the
 ;   associative property of xor and ror.
 ;
