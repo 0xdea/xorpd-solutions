@@ -67,6 +67,10 @@
 ;     - rcx becomes 0xfffefffe
 ; [...]
 ;
+; NOTE. @AlexAltea points out that this snippet calculates
+; rax = 0x100000000 * (1 - pi/4). Kudos to him for his
+; explanation!
+;
 ; This analysis was facilitated by the assembly REPL rappel 
 ; by yrp604@yahoo.com:
 ;

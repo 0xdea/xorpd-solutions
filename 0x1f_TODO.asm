@@ -50,6 +50,10 @@
 ;   snippet) is always even, because it is the sum
 ;   of two odd numbers.
 ;
+; NOTE. These operations seem to be related to the
+; https://en.wikipedia.org/wiki/Collatz_conjecture
+; (thanks to @AlexAltea for pointing this out).
+;
 ; Example:
 ; $ gdb 0x1f
 ; (gdb) disas main
