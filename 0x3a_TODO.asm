@@ -24,6 +24,9 @@
 ; the mul instruction) and the significance of the hardcoded
 ; number 0x218a392cd3d5dbf are unclear to me at this point.
 ;
+; NOTE. @AlexAltea points out that this snippet computes the 
+; amount of (left-most) leading zeros via De Bruijn sequences.
+;
 ; This analysis was facilitated by the assembly REPL rappel 
 ; by yrp604@yahoo.com:
 ;

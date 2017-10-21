@@ -49,6 +49,9 @@
 ;
 ; Once again, its ultimate purpose is not clear to me.
 ;
+; NOTE. @AlexAltea points out that this snipper computes the
+; direction of the lines in the (Heighway) Dragon Curve (!).
+;
 
 	BITS 64
 
