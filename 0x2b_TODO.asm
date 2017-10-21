@@ -42,7 +42,7 @@
 ;
 ; NOTE. @AlexAltea points out that the purpose of this
 ; snippet is to traverse a linked list and find the first
-; element pointing to itself.
+; element pointing to itself. Nice explanation!
 ;
 ; Example:
 ; $ gdb 0x2b
