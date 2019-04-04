@@ -114,7 +114,7 @@
 ;    0x080484e2 <+2>:	cmp    $0xa,%al
 ;    0x080484e4 <+4>:	sbb    $0x69,%al
 ;    0x080484e6 <+6>:	das    
-;    0x080484e7 <+7>:	xchg   %ax,%ax	<- notice the cool 32-bit nops here;)
+;    0x080484e7 <+7>:	xchg   %ax,%ax	<- notice the cool 32-bit mode nops here;)
 ;    0x080484e9 <+9>:	xchg   %ax,%ax
 ;    0x080484eb <+11>:	xchg   %ax,%ax
 ;    0x080484ed <+13>:	xchg   %ax,%ax
