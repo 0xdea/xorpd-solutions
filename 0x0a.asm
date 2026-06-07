@@ -10,7 +10,7 @@
 ; the least-significant byte at the memory location pointed
 ; by rdi, but only if the carry flag (cf) is set. 
 ;
-; In other words, this snippet increments by one a rcx byte
+; In other words, this snippet increments by one a rcx+1 byte
 ; long integer stored at the address pointed by rdi.
 ;
 ; It is interesting to note that the inc instruction allows 

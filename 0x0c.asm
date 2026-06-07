@@ -16,7 +16,7 @@
 ; - Finally, the contents of rax and rcx are compared. They
 ;   will be equal, regardless of their initial value and of 
 ;   the value of the mask contained in rbx, because of the
-;   associative property of xor and ror.
+;   distributive property of ror over xor.
 ;
 ; This analysis was facilitated by the assembly REPL rappel 
 ; by yrp604@yahoo.com:

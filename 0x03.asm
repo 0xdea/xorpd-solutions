@@ -4,9 +4,9 @@
 ; 0x03 explanation - from xchg rax,rax by xorpd@xorpd.net
 ; Copyright (c) 2016 Marco Ivaldi <raptor@0xdeadbeef.info>
 ;
-; This snippet sets rax to the lower value between rax and
-; rdx, using the cf flag to check for carry in a way similar 
-; to the previous snippet 0x02. 
+; This snippet sets rax to the lower value between (unsigned)
+; rax and rdx, using the cf flag to check for carry in a way 
+; similar to the previous snippet 0x02. 
 ; 
 ; In detail, it subtracts rax from rdx, sets a mask in rcx 
 ; based on the result (0 if rax <= rdx; 0xffffffffffffffff 
