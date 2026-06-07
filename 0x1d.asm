@@ -151,6 +151,6 @@ main:
 	mov	rbp,buff1 + n*8		; load the address of buff1 + n*8
 					; into the base pointer (rbp)
 	enter	0,n+1			; push rbp [i.e.: buff1 + n*8]
-					; mov rbp,rsp [i.e.: buff2 + n*8 + 8]
+					; mov rbp,rsp [i.e.: buff2 + n*8]
 					; [push n+1 additional frame pointers]
 					; sub rsp,(n+1)*8 + 8

@@ -101,7 +101,7 @@
 ; in:   0xb		out:  42
 ; in:   0xc		out:  43
 ; in:   0xd		out:  44
-; in:   0xe		out:  44
+; in:   0xe		out:  45
 ; in:   0xf		out:  46
 ;
 ; Example:
