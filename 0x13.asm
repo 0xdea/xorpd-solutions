@@ -29,15 +29,15 @@
 ; For example, for rax = 2 and rbx = 4, the following
 ; operations are executed:
 ; (rax ^ rbx) ^ ((rax & rbx) * 2) =
-; = (6 ^ 4) ^ ((6 & 4) * 2) = 6 ^ (0 * 2) = 6 ^ 0 = 6
+; = (2 ^ 4) ^ ((2 & 4) * 2) = 6 ^ (0 * 2) = 6 ^ 0 = 6
 ;
 ; For rax = 2 and rbx = 3:
 ; (rax ^ rbx) ^ ((rax & rbx) * 2) =
 ; = (2 ^ 3) ^ ((2 & 3) * 2) = 1 ^ (2 * 2) = 1 ^ 4 = 5
 ;
 ; For rax = 6 and rbx = 12:
-; (rax ^ rbx) ^ ((rax & rbx) * 2) ^ ((rax ^ rbx) & ((rax & rbx) * 2)) =
-; = (6 ^ 12) ^ ((6 & 12) * 2) ^ ((6 ^ 12) & ((6 & 12) * 2)) =
+; (rax ^ rbx) ^ ((rax & rbx) * 2) ^ (((rax ^ rbx) & ((rax & rbx) * 2)) * 2)
+; = (6 ^ 12) ^ ((6 & 12) * 2) ^ (((6 ^ 12) & ((6 & 12) * 2)) * 2) =
 ; = 10 ^ (4 * 2) ^ ((10 & 8) * 2)) = 10 ^ 8 ^ 16 = 2 ^ 16 = 18
 ;
 
