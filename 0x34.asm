@@ -4,8 +4,9 @@
 ; 0x34 explanation - from xchg rax,rax by xorpd@xorpd.net
 ; Copyright (c) 2016 Marco Ivaldi <raptor@0xdeadbeef.info>
 ;
-; This illustrates how to swap different amounts of bits 
-; (word, byte, 2 bits, nybble, and 1 bit) in a dword (32 bits).
+; This snippet performs a 32-bit bitwise reversal of eax by 
+; executing five successive pairwise-swap passes at 
+; granularities of 16, 8, 4, 2, and 1 bits (thanks @tuket!).
 ;
 ; This analysis was facilitated by the assembly REPL rappel 
 ; by yrp604@yahoo.com:
@@ -29,7 +30,7 @@ main:
 	or	eax,ecx		; eax = eax | ecx
 
 	; swap 1st word (16 bits) with 2nd word
-	; 0x12345678 -> 0x56781234
+	; 0x12345678 = 00010010001101000101011001111000 -> 0x56781234 = 01010110011110000001001000110100
 
 	mov	ecx,eax		; ecx = eax
 	and	ecx,0xff00ff00	; ecx = ecx & 0xff00ff00
@@ -39,7 +40,7 @@ main:
 	or	eax,ecx		; eax = eax | ecx
 
 	; swap 1st byte (8 bits) with 2nd byte and 3rd byte with 4th byte
-	; 0x12345678 -> 0x34127856
+	; 0x56781234 = 01010110011110000001001000110100 -> 0x78563412 = 01111000010101100011010000010010
 
 	mov	ecx,eax		; ecx = eax
 	and	ecx,0xcccccccc	; ecx = ecx & 0xcccccccc
@@ -49,8 +50,7 @@ main:
 	or	eax,ecx		; eax = eax | ecx
 
 	; swap 1st 2 bits with 2nd 2 bits, 3rd 2 bits with 4th 2 bits, etc.
-	; 00010010001101000101011001111000 -> 01001000110000010101100111010010
-	; (0x55555555 doesn't change, because 01010101010101010101010101010101)
+	; 0x78563412 = 01111000010101100011010000010010 -> 0xd259c148 = 11010010010110011100000101001000
 
 	mov	ecx,eax		; ecx = eax
 	and	ecx,0xf0f0f0f0	; ecx = ecx & 0xf0f0f0f0
@@ -59,8 +59,8 @@ main:
 	shl	eax,0x4		; eax = eax<<4
 	or	eax,ecx		; eax = eax | ecx
 
-	; swap 1st nybble (4 bits) with 2nd nybble, 3rd nybble with 4th, etc.
-	; 0x12345678 -> 0x21436587
+	; swap 1st nibble (4 bits) with 2nd nibble, 3rd nibble with 4th, etc.
+	; 0xd259c148 = 11010010010110011100000101001000 -> 0x2d951c84 = 00101101100101010001110010000100
 
 	mov	ecx,eax		; ecx = eax
 	and	ecx,0xaaaaaaaa	; ecx = ecx & 0xaaaaaaaa
@@ -70,4 +70,4 @@ main:
 	or	eax,ecx		; eax = eax | ecx
 
 	; swap 1st bit with 2nd bit, 3rd bit with 4th bit, etc.
-	; 00010010001101000101011001111000 -> 00100001001110001010100110110100
+	; 0x2d951c84 = 00101101100101010001110010000100 -> 0x1e6a2c48 = 00011110011010100010110001001000

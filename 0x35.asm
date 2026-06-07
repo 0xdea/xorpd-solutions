@@ -4,9 +4,10 @@
 ; 0x35 explanation - from xchg rax,rax by xorpd@xorpd.net
 ; Copyright (c) 2016 Marco Ivaldi <raptor@0xdeadbeef.info>
 ;
-; This snippet illustrates how to add different amounts of
-; bits (1 bit, 2 bits, nybble, byte, word) in a dword (32 
-; bits).
+; This snippet counts the number of set bits in eax
+; (popcount) by treating the 32-bit register as 32 1-bit
+; accumulators and merging adjacent pairs until a single 
+; 32-bit field holds the total (thanks @tuket!).
 ;
 ; This analysis was facilitated by the assembly REPL rappel 
 ; by yrp604@yahoo.com:
