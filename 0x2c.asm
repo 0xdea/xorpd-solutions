@@ -16,7 +16,7 @@
 ;
 ; It does so by cleverly using the stack as follows. First, 
 ; it loads a 0 qword (64 bits) into the memory location pointed 
-; by rbx + 8*rcx. Then, it loads a 0 qword into the memory
+; by rbx + 8*rcx. Then, it loads a 1 qword into the memory
 ; location pointed by rbx + 8*rdx. If rcx == rdx, the second
 ; qword (1) overwrites the first one (0). Afterwards, it
 ; loads the value at memory location rbx + 8*rcx (which can

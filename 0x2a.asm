@@ -26,7 +26,7 @@
 ; (gdb) i r rax rbx rcx rsi rdi
 ; rax            0x4847464544434241	5208208757389214273
 ; rbx            0x6009f0	6294000		<- initial address of string
-; rcx            0x0	0			<- loop counter
+; rcx            0x0	0			<- loop counter (should be pre-initialized)
 ; rsi            0x6009f8	6294008
 ; rdi            0x6009f0	6294000
 ; (gdb) x/16x 0x6009f0
