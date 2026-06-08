@@ -4,24 +4,37 @@
 ; 0x1f explanation - from xchg rax,rax by xorpd@xorpd.net
 ; Copyright (c) 2016 Marco Ivaldi <raptor@0xdeadbeef.info>
 ;
-; TODO: THIS EXPLANATION IS INCOMPLETE
+; This snippet is an optimized implementation of the Collatz
+; conjecture (https://en.wikipedia.org/wiki/Collatz_conjecture),
+; also known as the 3n+1 problem (thanks to @AlexAltea for 
+; pointing this out). The classic formulation is:
 ;
-; Here's another incomplete solution. Hopefully these 
-; snippets aren't getting too complicated... This one
-; does the following:
+;   - If n is even: n = n / 2
+;   - If n is odd:  n = 3n + 1
+;   - Repeat until n = 1
 ;
-; - Discard all least-significant bits not set (0)
-;   in rax by shifting it right a number of positions
-;   specified by the result of the bsf instruction.
-; - If the resulting value in rax is 1, then exit
-;   (this condition is true only if the previous
-;   value of rax was a power of two, see below).
-; - Otherwise, rax = rax + 2 * rax + 1 = rax * 3 + 1.
-;   However, this can also be interpreted as rax + left
-;   shift of rax + 1, which in turn means "add rax with
-;   its left shifted value with a 1 in the LSB instead
-;   of a 0".
-; - Go back to the first step and keep looping.
+; This version merges all consecutive "divide by 2" steps into a
+; single right shift, using bsf to count the trailing zero bits:
+;
+; - bsf rcx,rax finds the position of the lowest set bit in rax,
+;   i.e. the number of trailing zeros.
+; - shr rax,cl discards all those trailing zeros at once, leaving
+;   rax odd (or 1 if rax was a power of two).
+; - If rax == 1 we are done (the Collatz sequence has converged).
+; - Otherwise rax = rax + 2*rax + 1 = 3*rax + 1. Since rax is
+;   always odd at this point, the lea operand can be read as:
+;   take rax, left-shift it by one (giving an even value), then
+;   set the LSB, and add the original rax — the standard Collatz
+;   odd step implemented with a single instruction.
+; - Jump back and repeat.
+;
+; Two properties worth noting:
+;
+; - Any power of two (1, 2, 4, 8, ...) causes an immediate exit:
+;   bsf+shr strips all the trailing zeros in one shot, leaving 1.
+; - The result of the lea instruction is always even (odd + odd
+;   + 1 = even), so the next iteration always strips at least one
+;   trailing zero before reaching another odd number.
 ;
 ; Here's an example to clarify the described operations:
 ;
@@ -40,19 +53,6 @@
 ; - rax = 0b00000101 + 0b00001011 = 0b00010000 (even)
 ; - Discard all LSBs not set: rax = 0b00000001 (odd)
 ; - rax is 1, exit the loop!
-;
-; My analysis highlighted a couple of properties:
-;
-; - Powers of two (e.g. 0, 1, 2, 4, 8...) make the
-;   program exit right away.
-; - The result of the lea operation (which by the
-;   way seems to be the key to fully understand this
-;   snippet) is always even, because it is the sum
-;   of two odd numbers.
-;
-; NOTE. These operations seem to be related to the
-; https://en.wikipedia.org/wiki/Collatz_conjecture
-; (thanks to @AlexAltea for pointing this out).
 ;
 ; Example:
 ; $ gdb 0x1f
