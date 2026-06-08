@@ -6,7 +6,7 @@
 ;
 ; This snippet performs a 32-bit bitwise reversal of eax by 
 ; executing five successive pairwise-swap passes at 
-; granularities of 16, 8, 4, 2, and 1 bits (thanks @tuket!).
+; granularities of 16, 8, 2, 4, and 1 bits (thanks @tuket!).
 ;
 ; This analysis was facilitated by the assembly REPL rappel 
 ; by yrp604@yahoo.com:
@@ -26,7 +26,7 @@ main:
 				; i.e. ecx = (eax & 0xffff0000)>>16
 	and	eax,0x0000ffff	; eax = eax & 0x0000ffff
 	shl	eax,0x10	; eax = eax<<16
-				; i.e. eax = (eax & 0x0000ffff)>>16
+				; i.e. eax = (eax & 0x0000ffff)<<16
 	or	eax,ecx		; eax = eax | ecx
 
 	; swap 1st word (16 bits) with 2nd word

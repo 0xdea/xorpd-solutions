@@ -84,7 +84,7 @@ main:
 	; eax = (eax & 0x0f0f0f0f) + ((edx>>4) & 0x0f0f0f0f)
 	; (0x0f0f0f0f is 0b1111000011110000111100001111)
 	;
-	; add each adjacent nybble, two by two:
+	; add each adjacent nibble, two by two:
 	; 0b00010010001101000101011001111000 ->
 	;   0001+0010 0011+0100 0101+0110 0111+1000
 	; = 0000 0011 0000 0111 0000 1011 0000 1111 =

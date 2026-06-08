@@ -23,7 +23,7 @@
 ; However, inspired by the next 0x34 snippet, I've decided 
 ; to consider each step as a separate snippet, reinitializing 
 ; rax to the chosen input. This way, this snippet illustrates
-; how to xor different amounts of bits (1 bit, 2 bits, 1 nybble,
+; how to xor different amounts of bits (1 bit, 2 bits, 1 nibble,
 ; 1 byte, 1 word, 1 dword) with each other.
 ;
 ; This analysis was facilitated by the assembly REPL rappel 
@@ -56,7 +56,7 @@ main:
 	shr	rdx,0x4		;
 	xor	rax,rdx		; rax = rax ^ (rax>>4)
 
-	; xor 0x0 with 1st nybble, 1st nybble with 2nd nybble, etc.
+	; xor 0x0 with 1st nibble, 1st nibble with 2nd nibble, etc.
 	; 10010001101000101011001111000 -> 10011000101110001001100011111
 
 	mov	rdx,rax		;
