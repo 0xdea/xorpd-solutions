@@ -6,7 +6,8 @@
 ;
 ; This snippet is similar to the previous snippet 0x23. It
 ; illustrates a clever/convoluted way to determine if the 
-; value contained in rax is even or odd. If the result in 
+; value contained in rax is even or odd (Newton's method for 
+; the multiplicative inverse mod 2^64). If the result in 
 ; rcx is 0, rax is even; if the result in rcx is 1, rax is 
 ; odd. As a bonus, the original input value is preserved in 
 ; the rbx register.
@@ -23,18 +24,18 @@ main:
 	mov	rsi,rax		; rsi = rax
 .loop:
 	mul	rbx		; rdx:rax = rax * rbx
-				; i.e. rdx:rax = rax * rax = pow(rax, 2)
+				; i.e. on first iteration rdx:rax = rax * rax = pow(rax, 2)
 	mov	rcx,rax		; rcx = rax
-				; i.e. rcx = pow(rax, 2)
+				; i.e. on first iteration rcx = pow(rax, 2)
 
 	sub	rax,2		; rax = rax - 2
-				; i.e. rax = pow(rax, 2) - 2
+				; i.e. on first iteration rax = pow(rax, 2) - 2
 	neg	rax		; rax = ~rax + 1
-				; i.e. rax = ~(pow(rax, 2) - 2) + 1
+				; i.e. on first iteration rax = ~(pow(rax, 2) - 2) + 1
 	mul	rsi		; rdx:rax = rax * rsi
-				; i.e. (~(pow(rax, 2) - 2) + 1) * rax
+				; i.e. on first iteration (~(pow(rax, 2) - 2) + 1) * rax
 	mov	rsi,rax		; rsi = rax
-				; i.e. rsi = (~(pow(rax, 2) - 2) + 1) * rax
+				; i.e. on first iteration rsi = (~(pow(rax, 2) - 2) + 1) * rax
 
 	cmp	rcx,1		; if (pow(rax, 2) <= 1) exit
 	ja	.loop		; else keep looping

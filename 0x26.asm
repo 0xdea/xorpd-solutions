@@ -27,7 +27,7 @@ main:
 	mov	rdx,rax		; rdx = rax
 	shr	rax,7		; rax = (int)(rax / pow(2,7)) = (int)(rax / 128)
 				; i.e. shift rax right by 7 positions (64 - 57)
-	shl	rdx,0x39	; rdx = rdx * (pow(2,57)
-				; i.e. shift rax left by 57 positions (64 - 7)
+	shl	rdx,0x39	; rdx = rdx * (pow(2,57))
+				; i.e. shift original rax saved in rdx left by 57 positions (64 - 7)
 	or	rax,rdx		; rax = rax | rdx
 				; i.e. ror rax,7
